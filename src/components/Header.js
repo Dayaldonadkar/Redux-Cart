@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const getData = useSelector((state) => state.cartreducer);
+  console.log(getData);
   const [active, setActive] = useState(false);
 
   const handleActiveCart = () => {

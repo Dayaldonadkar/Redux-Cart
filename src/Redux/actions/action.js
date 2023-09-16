@@ -18,9 +18,22 @@
 //   };
 // };
 
-export const ADD_ITEM = (item) => {
+// export const ADD_ITEM = (item) => {
+//   return {
+//     type: "ADD_ITEM",
+//     payload: item,
+//   };
+// };
+
+// export const ADD_ITEM = (item) => {
+//   return {
+//     type: "ADD_CART",
+//     payload: item,
+//   };
+// };
+export const ADD = (item) => {
   return {
-    type: "ADD_ITEM",
+    type: "ADD_CART",
     payload: item,
   };
 };

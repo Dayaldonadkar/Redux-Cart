@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { DLT } from "../Redux/actions/action";
+import { useDispatch } from "react-redux";
 
 const CardsDetails = () => {
+  const [data, setData] = useState([]);
+  const { id } = useParams();
+  // console.log(id);
+  const history = useNavigate();
+  const getData = useSelector((state) => state.cartreducer.carts);
+  // console.log(getData);
+
+  const dispatch = useDispatch();
+
+  const compare = () => {
+    const comparedata = getData.filter((e) => {
+      return e.id == id;
+    });
+
+    console.log(comparedata);
+    setData(comparedata);
+  };
+
+  const del = (e) => {
+    dispatch(DLT(e));
+    history("/");
+  };
+
+  useEffect(() => {
+    compare();
+  }, [id]);
+
   return (
     <div className="flex justify-center py-10">
       <div className="w-[80%]">
@@ -12,22 +43,28 @@ const CardsDetails = () => {
                 alt=""
               />
             </div>
-            <div className="w-[40%]">
-              <h1>Restaurant:</h1>
-              <div className="flex justify-between">
-                <div>
-                  <p>Price:</p>
-                  <p>Dishes:</p>
-                  <p>Total:</p>
-                </div>
+            {data.map((element) => {
+              return (
+                <div className="w-[40%] key={id}">
+                  <h1>Restaurant:{element.rname}</h1>
+                  <div className="flex justify-between">
+                    <div>
+                      <p>Price: {element.price}</p>
+                      <p>Dishes: {element.address}</p>
+                      <p>Total: </p>
+                    </div>
 
-                <div>
-                  <p>Rating:</p>
-                  <p>Order Review:</p>
-                  <p>Remove:</p>
+                    <div>
+                      <p>Rating: {element.rating}</p>
+                      <p>Order Review: {element.somedata}</p>
+                      <button onClick={() => del(element.id)}>
+                        Remove:del
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

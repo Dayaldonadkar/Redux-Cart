@@ -15,7 +15,7 @@ const Cards = () => {
       <div className="grid grid-cols-2  w-[80%]">
         {data.map((element) => {
           return (
-            <div>
+            <div key={element.id}>
               <div className="py-10">
                 <img className="w-[80%] h-72" src={element.imgdata} alt="" />
                 <div className="flex flex-col px-3 space-y-2">
